@@ -1,0 +1,18 @@
+<%@ jet package="templates" imports="org.emftext.language.BON.* org.emftext.language.BON.codegenerator.* java.util.List" class="SystemBONModel"%>
+<%
+	String explanation=(String)argument;
+	if (explanation!="") {
+		String[] copyArray=explanation.split("\\\\");
+		String copyName="";
+		for (String string : copyArray) {
+			copyName+=string;
+		}
+		explanation=copyName;
+		explanation=explanation.substring(1,explanation.length()-1);
+	}
+%>
+<HTML>
+<BODY>
+<%=explanation%>
+</BODY>
+</HTML>

@@ -1,0 +1,101 @@
+<%@ jet package="templates" imports="org.emftext.language.BON.* org.emftext.language.BON.codegenerator.* java.util.List" class="Java2BONModel"%>
+<%
+  Informal_charts informalCharts = (Informal_charts) argument;
+%>
+-- Created by code generator
+system_chart <%=informalCharts.getSystem_chart().getName().toUpperCase()%>
+<%if (informalCharts.getSystem_chart().getChart_indexing()!=null) {%>
+indexing <%for (Index_Identifier indexIdent : informalCharts.getSystem_chart().getChart_indexing().getIndex_term_list()) {%>
+<%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%>"<%=string%>"<%if (indexIdent.getIndex_string().indexOf(string)!=indexIdent.getIndex_string().size()-1) {%>, <%} }%>;						
+<%} }%>
+<%if (informalCharts.getSystem_chart().getExplanation()!=null) {%>
+explanation
+	"<%=informalCharts.getSystem_chart().getExplanation().getName()%>"
+<%}%>
+<%for (Cluster cluster : informalCharts.getSystem_chart().getCluster_entries()) {%>
+cluster <%=cluster.getName().toUpperCase()%>
+description
+	"<%=cluster.getDescription()%>"				
+<%}%>
+end
+
+<%for (Cluster_chart clusterChart : informalCharts.getCluster_charts()) {%>
+cluster_chart <%=clusterChart.getCluster().getName().toUpperCase()%>
+<%if (clusterChart.getChart_indexing()!=null) {%>
+indexing <%for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_term_list()) {%>
+<%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%>"<%=string%>"<%if (indexIdent.getIndex_string().indexOf(string)!=indexIdent.getIndex_string().size()-1) {%>, <%} }%>;						
+<%}
+}%>
+<%if (clusterChart.getExplanation()!=null) {%>
+explanation
+	"<%=clusterChart.getExplanation().getName()%>"
+<%}%>
+<%for (Cluster clusterEntry : clusterChart.getClusterchart_entries()) {%>
+cluster <%=clusterEntry.getName().toUpperCase()%>
+description
+	"<%=clusterEntry.getDescription()%>"
+<%}%>
+<%for (ClassBON classBon : clusterChart.getClass_entries()) {%>
+class <%=classBon.getName().toUpperCase()%>
+description
+	"<%=classBon.getDescription()%>"
+<%}%>
+end
+
+<%}%>
+<%for (Class_chart classChart : informalCharts.getClass_charts()) {%>
+class_chart <%=classChart.getClass_().getName().toUpperCase()%>
+<%if (classChart.getChart_indexing()!=null) {%>
+indexing <%for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) {%>
+<%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%>"<%=string%>"<%if (indexIdent.getIndex_string().indexOf(string)!=indexIdent.getIndex_string().size()-1) {%>, <%} }%>;						
+<%} }%>
+<%if (classChart.getExplanation()!=null) {%>
+explanation
+	"<%=classChart.getExplanation().getName()%>"
+<%}%>
+<%if (classChart.getInherit().size()>0) {%>
+inherit <%for (ClassBON classbon : classChart.getInherit()) {%><%=classbon.getName().toUpperCase()%><%}%>
+<%}%>
+<%if (classChart.getQueries()!=null) {%>
+query
+<%for (Query query : classChart.getQueries().getQuery()) {%>
+	"<%=query.getName()%>"<%if (classChart.getQueries().getQuery().indexOf(query)!=classChart.getQueries().getQuery().size()-1) {%>,<%}%>
+<%}%>
+<%}%>
+<%if (classChart.getCommands()!=null) {%>
+command
+<%for (Command command : classChart.getCommands().getCommand()) {%>
+	"<%=command.getName()%>"<%if (classChart.getCommands().getCommand().indexOf(command)!=classChart.getCommands().getCommand().size()-1) {%>,<%}%>
+<%}%>
+<%}%>
+<%if (classChart.getConstraints()!=null) {%>
+constraint
+<%for (Constraint constraint : classChart.getConstraints().getConstraint()) {%>
+	"<%=constraint.getName()%>"<%if (classChart.getConstraints().getConstraint().indexOf(constraint)!=classChart.getConstraints().getConstraint().size()-1) {%>,<%}%>
+<%}%>
+<%}%>
+end
+
+<%}%> 
+
+<%for (Event_chart eventChart : informalCharts.getEvent_charts()) {%>
+event_chart <%=eventChart.getSystem_name().getName().toUpperCase()%>
+<%=eventChart.getEvent_type().getName().toLowerCase()%>
+<%for (Event event : eventChart.getEvent_entries()) {%>
+event
+	"<%=event.getName()%>"
+involves <%for (ClassBON involvedClass : event.getInvolves()) {%>
+	<%=involvedClass.getName().toUpperCase()%><%}%>
+<%}%>
+end
+
+<%}%>
+
+<%for (Creation_chart creationChart : informalCharts.getCreation_charts()) {%>
+creation_chart <%=creationChart.getSystem_name().getName().toUpperCase()%>
+<%for (Creation creation : creationChart.getCreation_entries()) {%>
+creator <%=creation.getCreator().getName().toUpperCase()%> creates <%for (ClassBON classbon : creation.getCreates()) {%><%=classbon.getName().toUpperCase()%><%if (creation.getCreates().indexOf(classbon)!=creation.getCreates().size()-1) {%>, <%}%><%}%>
+<%}%>
+end
+
+<%}%>

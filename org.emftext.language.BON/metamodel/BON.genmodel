@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.emftext.language.BON/src-gen"
+    modelPluginID="org.emftext.language.BON" modelName="BON" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>BON.ecore</foreignModel>
+  <genPackages prefix="BON" basePackage="org.emftext.language" disposableProviderFactory="true"
+      ecorePackage="BON.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="BON.ecore#//Event_type">
+      <genEnumLiterals ecoreEnumLiteral="BON.ecore#//Event_type/incoming"/>
+      <genEnumLiterals ecoreEnumLiteral="BON.ecore#//Event_type/outgoing"/>
+    </genEnums>
+    <genClasses ecoreClass="BON.ecore#//System_chart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//System_chart/cluster_entries"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BON.ecore#//Chart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Chart/chart_indexing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference BON.ecore#//Chart/explanation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Chart/chart_part"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BON.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BON.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Cluster">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Cluster/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Cluster_chart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Cluster_chart/class_entries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Cluster_chart/cluster"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Cluster_chart/clusterchart_entries"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Class_chart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Class_chart/class"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Class_chart/inherit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Class_chart/commands"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Class_chart/constraints"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Class_chart/queries"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BON.ecore#//DescriptionElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BON.ecore#//DescriptionElement/description"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Indexing">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Indexing/index_term_list"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//ClassBON">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//ClassBON/parent"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Informal_charts">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Informal_charts/system_chart"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Informal_charts/class_charts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Informal_charts/cluster_charts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Informal_charts/event_charts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Informal_charts/scenario_charts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Informal_charts/creation_charts"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Query"/>
+    <genClasses ecoreClass="BON.ecore#//Command"/>
+    <genClasses ecoreClass="BON.ecore#//Constraint"/>
+    <genClasses ecoreClass="BON.ecore#//Explanation"/>
+    <genClasses ecoreClass="BON.ecore#//Index_Identifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BON.ecore#//Index_Identifier/index_string"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Part"/>
+    <genClasses ecoreClass="BON.ecore#//Commands">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Commands/command"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Constraints">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Constraints/constraint"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Queries">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Queries/query"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Event_chart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Event_chart/system_name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Event_chart/event_entries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BON.ecore#//Event_chart/event_type"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Scenario_chart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Scenario_chart/system_name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Scenario_chart/scenario_entries"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Creation_chart">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Creation_chart/system_name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BON.ecore#//Creation_chart/creation_entries"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Event">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Event/involves"/>
+    </genClasses>
+    <genClasses ecoreClass="BON.ecore#//Scenario"/>
+    <genClasses ecoreClass="BON.ecore#//Creation">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Creation/creator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BON.ecore#//Creation/creates"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

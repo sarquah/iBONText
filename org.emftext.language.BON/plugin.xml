@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.emftext.org/language/BON"
+            class="org.emftext.language.BON.BONPackage"
+            genModel="metamodel/BON.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="org.emftext.language.BON.commands.category"
+            name="Sample Category">
+      </category>
+      <command
+            categoryId="org.emftext.language.BON.commands.category"
+            id="org.emftext.language.BON.commands.BONHandler"
+            name="Generate BON model">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.emftext.language.BON.javatobon.BONHandler"
+            commandId="org.emftext.language.BON.commands.BONHandler">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.emftext.language.BON.commands.BONHandler"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="org.emftext.language.BON.menus.BONHandler"
+               label="Java to BON"
+               mnemonic="M">
+            <command
+                  commandId="org.emftext.language.BON.commands.BONHandler"
+                  id="org.emftext.language.BON.menus.BONHandler"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="org.imm.dtu.s070069.java.toolbars.sampleToolbar">
+            <command
+                  commandId="org.emftext.language.BON.commands.BONHandler"
+                  id="org.emftext.language.BON.toolbars.BONHandler"
+                  tooltip="Say hello world">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>

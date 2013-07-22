@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax">
+		<metaInformationProvider class="org.emftext.language.BON.resource.bon.mopp.BonMetaInformation" id="org.emftext.language.BON.resource.bon.mopp.BonMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.eclipse.core.resources.problemmarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<super type="org.eclipse.emf.ecore.diagnostic">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.problem.syntax_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.BON.resource.bon.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.problem.print_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.BON.resource.bon.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.problem.unresolved_reference" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.BON.resource.bon.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.problem.analysis_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.BON.resource.bon.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.BON.resource.bon.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.nature" name="bon nature" point="org.eclipse.core.resources.natures">
+		<runtime>
+			<run class="org.emftext.language.BON.resource.bon.mopp.BonNature">
+			</run>
+		</runtime>
+		<builder id="org.emftext.language.BON.resource.bon.builder">
+		</builder>
+	</extension>
+	
+	<extension point="org.eclipse.core.resources.builders" id="org.emftext.language.BON.resource.bon.builder" name="bon Builder">
+		<builder hasNature="true">
+			<run class="org.emftext.language.BON.resource.bon.mopp.BonBuilderAdapter">
+			</run>
+		</builder>
+	</extension>
+	
+	<extension-point id="org.emftext.language.BON.resource.bon.default_load_options" name="Default Load Options" schema="schema/default_load_options.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.emf.ecore.extension_parser">
+		<parser class="org.emftext.language.BON.resource.bon.mopp.BonResourceFactoryDelegator" type="bon">
+		</parser>
+	</extension>
+	
+	<extension-point id="org.emftext.language.BON.resource.bon.additional_extension_parser" name="Additional Extension Parser" schema="schema/additional_extension_parser.exsd">
+	</extension-point>
+	
+	<extension point="org.eclipse.debug.core.breakpoints">
+		<breakpoint class="org.emftext.language.BON.resource.bon.debug.BonLineBreakpoint" id="org.emftext.language.BON.resource.bon.debug.breakpoint" markerType="org.emftext.language.BON.resource.bon.debug.lineBreakpoint.marker" name="bon Breakpoint">
+		</breakpoint>
+	</extension>
+	
+	<extension id="org.emftext.language.BON.resource.bon.debug.lineBreakpoint.marker" point="org.eclipse.core.resources.markers">
+		<super type="org.eclipse.debug.core.lineBreakpointMarker">
+		</super>
+		<super type="org.eclipse.core.resources.textmarker">
+		</super>
+		<persistent value="true">
+		</persistent>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+		<launchConfigurationType id="org.emftext.language.BON.resource.bon.ui.launchConfigurationType" delegate="org.emftext.language.BON.resource.bon.launch.BonLaunchConfigurationDelegate" modes="run,debug" name="bon Application" sourceLocatorId="org.emftext.language.BON.resource.bon.ui.sourceLocator" sourcePathComputerId="org.emftext.language.BON.resource.bon.ui.sourcePathComputer" delegateName="bon Launch Tooling" delegateDescription="This will run or debug .bon files.">
+		</launchConfigurationType>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourcePathComputers">
+		<sourcePathComputer class="org.emftext.language.BON.resource.bon.debug.BonSourcePathComputerDelegate" id="org.emftext.language.BON.resource.bon.ui.sourcePathComputer">
+		</sourcePathComputer>
+	</extension>
+	
+	<extension point="org.eclipse.debug.core.sourceLocators">
+		<sourceLocator id="org.emftext.language.BON.resource.bon.ui.sourceLocator" class="org.emftext.language.BON.resource.bon.debug.BonSourceLocator" name="bon Source Locator">
+		</sourceLocator>
+	</extension>
+	
+</plugin>

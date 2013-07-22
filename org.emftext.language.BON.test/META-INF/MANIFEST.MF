@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BONTest
+Bundle-SymbolicName: org.emftext.language.BON.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.emftext.language.bon.test.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.emftext.language.BON;bundle-version="1.0.0",
+ org.junit
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

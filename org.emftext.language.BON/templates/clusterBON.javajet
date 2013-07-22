@@ -1,0 +1,42 @@
+<%@ jet package="templates" imports="org.emftext.language.BON.* org.emftext.language.BON.codegenerator.* java.util.List" class="ClusterBONModel"%>
+<% 
+	Cluster_chart clusterChart = (Cluster_chart) argument;
+	String packagename="";
+	Cluster cluster=clusterChart.getCluster();
+	while (cluster!=null) {
+		packagename=cluster.getName().toLowerCase()+"."+packagename;
+		cluster=cluster.getParent();
+	}
+	packagename=packagename.substring(0,packagename.length()-1);
+	String description=clusterChart.getCluster().getDescription();
+	String[] copyArray=description.split("\\\\");
+	String copyName="";
+	for (String string : copyArray) {
+		copyName+=string;
+	}
+	description=copyName;
+	description=description.substring(1,description.length()-1);
+	String explanation="";
+	if (clusterChart.getExplanation()!=null) {
+		explanation=clusterChart.getExplanation().getName();
+		copyArray=explanation.split("\\\\");
+		copyName="";
+		for (String string : copyArray) {
+			copyName+=string;
+		}
+		explanation=copyName;
+		explanation=explanation.substring(1,explanation.length()-1);
+	}
+%>
+/**
+ * <%=description%>
+<%if (!clusterChart.getChart_indexing().getIndex_term_list().isEmpty()) {%>
+ * @bon.indexing <%for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_term_list()) { if (!indexIdent.getName().equals("author")) {%>
+ *     <li><%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%if (indexIdent.getIndex_string().indexOf(string)!=indexIdent.getIndex_string().size()-1) {%>,<%}%> <%}%></li><%}
+} 
+for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_term_list()) { if (indexIdent.getName().equals("author")) {%>
+ * @author <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%} } } }%>
+<%if (clusterChart.getExplanation()!=null) {%>
+ * @bon.explanation <%=explanation%><%}%>
+ */
+package <%=packagename%>;

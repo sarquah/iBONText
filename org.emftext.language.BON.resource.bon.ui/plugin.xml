@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.BON.resource.bon.ui.BonUIMetaInformation" id="org.emftext.language.BON.resource.bon.ui.BonUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.BON.resource.bon.ui.BonEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="bon" icon="icons/editor_icon.gif" id="org.emftext.language.BON.resource.bon.ui.BonEditor" name="EMFText bon Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.BON.resource.bon">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.BON.resource.bon.ui.BonPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Bon Text Editor" id="org.emftext.language.BON.resource.bon.ui.BonPreferencePage" class="org.emftext.language.BON.resource.bon.ui.BonPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.BON.resource.bon.ui.BonSyntaxColoringPreferencePage" class="org.emftext.language.BON.resource.bon.ui.BonSyntaxColoringPreferencePage" category="org.emftext.language.BON.resource.bon.ui.BonPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.BON.resource.bon.ui.BonBracketPreferencePage" class="org.emftext.language.BON.resource.bon.ui.BonBracketPreferencePage" category="org.emftext.language.BON.resource.bon.ui.BonPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.BON.resource.bon.ui.BonNewFileWizard" id="org.emftext.language.BON.resource.bon.ui.BonNewFileWizard" name="EMFText .bon file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.BON.resource.bon.ui.BonNewProjectWizard" id="org.emftext.language.BON.resource.bon.ui.BonNewProjectWizard" name="EMFText bon project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.BON.resource.bon.ui.BonMarkerResolutionGenerator" markerType="org.emftext.language.BON.resource.bon.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.BON.resource.bon.ui.BonAnnotationModelFactory" extensions="bon">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.BON.resource.bon" name=".bon File" base-type="org.eclipse.core.runtime.text" file-extensions="bon">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="bon" id="org.emftext.language.BON.resource.bon.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.BON.resource.bon.ui.occurences">
+		</type>
+		<type name="org.emftext.language.BON.resource.bon.ui.occurences.declaration" super="org.emftext.language.BON.resource.bon.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.BON.resource.bon.ui.occurences" label="Occurrences (in .bon files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="bon.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="bon.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="bon.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="bon.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="bon.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="bon.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="bon.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="bon.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="bon.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.BON.resource.bon.ui.occurences.declaration" label="Declarations (in .bon files)" textPreferenceKey="bon.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="bon.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="bon.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="bon.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="bon.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="bon.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+		<launchConfigurationTypeImage icon="/icons/launch_type_icon.gif" configTypeID="org.emftext.language.BON.resource.bon.ui.launchConfigurationType" id="org.emftext.language.bon.launchImage">
+		</launchConfigurationTypeImage>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+		<launchConfigurationTabGroup type="org.emftext.language.BON.resource.bon.ui.launchConfigurationType" class="org.emftext.language.BON.resource.bon.ui.launch.BonLaunchConfigurationTabGroup" id="org.emftext.language.bon.launchConfigurationTabGroup" helpContextId="org.emftext.language.bon.launchConfigHelpContext">
+			<launchMode mode="debug" perspective="org.eclipse.debug.ui.DebugPerspective" description="Debug bon model.">
+			</launchMode>
+			<launchMode mode="run" description="Run bon model.">
+			</launchMode>
+		</launchConfigurationTabGroup>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+		<shortcut label="bon Application" icon="/icons/launch_shortcut_icon.gif" helpContextId="org.emftext.language.bon.launch" modes="run,debug" class="org.emftext.language.BON.resource.bon.ui.launch.BonLaunchShortcut" description="Launch a bon model" id="org.emftext.language.bon.launchShortcut">
+			<description description="Run bon model" mode="run">
+			</description>
+			<description description="Debug bon model" mode="debug">
+			</description>
+			<contextualLaunch>
+				<enablement>
+					<with variable="selection">
+						<count value="1">
+						</count>
+						<iterate>
+							<test property="org.emftext.language.bon.isLaunchable">
+							</test>
+						</iterate>
+					</with>
+				</enablement>
+			</contextualLaunch>
+			<configurationType id="org.emftext.language.BON.resource.bon.ui.launchConfigurationType">
+			</configurationType>
+		</shortcut>
+	</extension>
+	
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester id="org.emftext.language.bon.PropertyTester" type="java.lang.Object" namespace="org.emftext.language.bon" properties="isLaunchable" class="org.emftext.language.BON.resource.bon.ui.BonPropertyTester">
+		</propertyTester>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.BON.resource.bon.ui.debug.lineBreakpoint" markerType="org.emftext.language.BON.resource.bon.debug.lineBreakpoint.marker" super="org.eclipse.debug.core.breakpoint">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.BON.resource.bon.ui.debug.lineBreakpoint" label="Breakpoints (in .bon files)" icon="/icons/breakpoint_icon.gif" textPreferenceKey="org.emftext.language.BON.resource.bon.ui.lineBreakpoint" textPreferenceValue="false" highlightPreferenceKey="org.emftext.language.BON.resource.bon.ui.lineBreakpointHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="org.emftext.language.BON.resource.bon.ui.lineBreakpointIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="org.emftext.language.BON.resource.bon.ui.lineBreakpointIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="org.emftext.language.BON.resource.bon.ui.lineBreakpointColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="org.emftext.language.BON.resource.bon.ui.showLineBreakpointInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="org.emftext.language.BON.resource.bon.ui.isLineBreakpointGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="org.emftext.language.BON.resource.bon.ui.isLineBreakpointGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="org.emftext.language.BON.resource.bon.ui.lineBreakpointTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.adapters">
+		<factory adaptableType="org.emftext.language.BON.resource.bon.ui.BonEditor" class="org.emftext.language.BON.resource.bon.ui.debug.BonAdapterFactory">
+			<adapter type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.BON.resource.bon.debug.BonDebugVariable" class="org.emftext.language.BON.resource.bon.ui.debug.BonAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementLabelProvider">
+			</adapter>
+		</factory>
+		<factory adaptableType="org.emftext.language.BON.resource.bon.debug.BonDebugVariable" class="org.emftext.language.BON.resource.bon.ui.debug.BonAdapterFactory">
+			<adapter type="org.eclipse.debug.internal.ui.viewers.model.provisional.IElementContentProvider">
+			</adapter>
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.ui.popupMenus">
+		<viewerContribution id="org.emftext.language.BON.resource.bon.ui.RulerPopupActions" targetID="org.emftext.language.BON.resource.bon.EditorRuler">
+			<action id="org.emftext.language.BON.resource.bon.ui.toggleBreakpointAction" icon="icons/breakpoint_icon.gif" label="Toggle Breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" menubarPath="debug">
+			</action>
+		</viewerContribution>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editorActions">
+		<editorContribution targetID="org.emftext.language.BON.resource.bon.ui.BonEditor" id="org.emftext.language.BON.resource.bon.ui.BreakpointRulerActions">
+			<action id="org.emftext.language.BON.resource.bon.ui.debug.RulerToggleBreakpointAction" label="Add breakpoint" class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate" actionID="RulerDoubleClick">
+			</action>
+		</editorContribution>
+	</extension>
+	
+	<extension point="org.eclipse.debug.ui.debugModelPresentations">
+		<debugModelPresentation id="org.emftext.language.BON.resource.bon.debugModel" class="org.emftext.language.BON.resource.bon.ui.debug.BonDebugModelPresentation">
+		</debugModelPresentation>
+	</extension>
+	
+</plugin>

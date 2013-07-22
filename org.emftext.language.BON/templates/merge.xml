@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<merge:options
+	xmlns:merge="http://www.eclipse.org/org/eclipse/emf/codegen/jmerge/Options">
+
+	<merge:dictionaryPattern name="generatedMember"
+		select="Member/getComment" match="\s*@\s*(generated)\s*\n" />
+
+	<merge:pull targetMarkup="^generated$" sourceGet="Method/getBody"
+		targetPut="Method/setBody" />
+		
+	<merge:pull targetMarkup="^generated$" sourceGet="Member/getComment"
+		targetPut="Member/setComment" />
+	
+	<merge:pull targetMarkup="^generated$" sourceGet="Type/getSuperclass"
+		targetPut="Type/setSuperclass" />
+
+</merge:options>

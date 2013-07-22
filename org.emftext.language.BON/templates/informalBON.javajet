@@ -1,0 +1,102 @@
+<%@ jet package="templates" imports="org.emftext.language.BON.* org.emftext.language.BON.codegenerator.* java.util.List" class="InformalBONModel"%>
+<% 
+	ArgumentHelper helper = (ArgumentHelper) argument;
+	ClassBON bonclass = helper.getClassBON();
+	Class_chart classChart = helper.getClassChart();
+	Cluster_chart clusterChart = helper.getClusterChart();
+	List<Event_chart> eventCharts = helper.getEventCharts();
+	List<Creation_chart> creationCharts = helper.getCreationCharts();
+	List<Class_chart> classCharts = helper.getClassCharts();
+	
+	boolean isEvent=true;
+	boolean isCreator=true;
+	boolean inherits=false;
+	boolean inheritFromOtherClass=false;
+	String description=bonclass.getDescription();
+	String[] copyArray=description.split("\\\\");
+	String copyName="";
+	for (String string : copyArray) {
+		copyName+=string;
+	}
+	description=copyName;
+	description=description.substring(1,description.length()-1);
+	String explanation="";
+	if (classChart.getExplanation()!=null) { 
+		explanation=classChart.getExplanation().getName();	
+	   copyArray=explanation.split("\\\\");
+		copyName="";
+		for (String string : copyArray) {
+			copyName+=string;
+		}
+		explanation=copyName;
+	}
+	String packagename="";
+	String inheritedClass="";
+	Cluster cluster=clusterChart.getCluster();
+	while (cluster!=null) {
+		packagename=cluster.getName().toLowerCase()+"."+packagename;
+		cluster=cluster.getParent();
+	}
+	packagename=packagename.substring(0,packagename.length()-1);
+	if (!classChart.getInherit().isEmpty()) {	
+		inherits=true;
+		inheritedClass = classChart.getInherit().get(0).getName().substring(0,1).toUpperCase()+classChart.getInherit().get(0).getName().substring(1,classChart.getInherit().get(0).getName().length()).toLowerCase();
+		cluster=clusterChart.getCluster().getParent();
+		for (Class_chart tmpclassChart : classCharts) {
+			if (tmpclassChart.getClass_().equals(classChart.getInherit().get(0))) {
+				cluster=tmpclassChart.getClass_().getParent();
+				while (cluster!=null) {
+					inheritedClass=cluster.getName().toLowerCase()+"."+inheritedClass;
+					cluster=cluster.getParent();
+				}
+				inheritFromOtherClass=true;
+				break;
+			}
+		}		
+	}
+%>
+package <%=packagename%>;
+
+<%if (inheritFromOtherClass) {%>import <%=inheritedClass%>;<%}%>
+
+/**
+ * <%=description%> 
+<%if (classChart.getChart_indexing()!=null) {%>
+ * @bon.indexing <%for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) { if (!indexIdent.getName().equals("author")) {%>
+ *     <li><%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%}%></li><%}
+ } }%>
+<%if (classChart.getExplanation()!=null) {%> 
+ * @bon.explanation <%=explanation.substring(1,explanation.length()-1)%><%for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) {%><%if (indexIdent.getName().equals("author")) {%>
+ * @author <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%> <%} } } }%>
+<%if (classChart.getQueries()!=null) {%>
+ * @bon.query <%for (Query query : classChart.getQueries().getQuery()) {%>
+ *	   <li><%=query.getName().substring(1,query.getName().length()-1)%></li><%}%>
+<%}%>
+<%if (classChart.getCommands()!=null) {%>
+ * @bon.command <%for (Command command : classChart.getCommands().getCommand()) {%>
+ *	   <li><%=command.getName().substring(1,command.getName().length()-1)%></li><%}%>
+<%}%>
+<%if (classChart.getConstraints()!=null) {%>
+ * @bon.constraint <%for (Constraint constraint : classChart.getConstraints().getConstraint()) {%>
+ *     <li><%=constraint.getName().substring(1,constraint.getName().length()-1)%></li><%}%>
+<%}%>
+<%for (Event_chart eventChart : eventCharts) { for (Event event : eventChart.getEvent_entries()) { for (ClassBON classBON : event.getInvolves()) { if (classBON==bonclass) {%>
+<%if (isEvent) {%>
+ * @bon.event<%isEvent=false;}%>
+ *     <li><%=eventChart.getEvent_type().getName()%>: <%=event.getName().substring(1,event.getName().length()-1)%></li>
+  <%} } } }%>
+<%for (Creation_chart creationChart : creationCharts) { for (Creation creation : creationChart.getCreation_entries()) { if (creation.getCreator()==bonclass) {%>
+ <%if (isCreator) {%>
+ * @bon.creator<%isCreator=false;}%> 
+ *     <li><%=bonclass.getName().substring(0,1).toUpperCase()+bonclass.getName().substring(1,bonclass.getName().length()).toLowerCase()%> creates <%for (ClassBON creatingClasses : creation.getCreates()) {%><%=creatingClasses.getName().substring(0,1).toUpperCase()+creatingClasses.getName().substring(1,creatingClasses.getName().length()).toLowerCase()%></li><%}%>
+  <%} } }%>
+ * @generated
+ */
+public class <%=bonclass.getName().substring(0,1).toUpperCase()+bonclass.getName().substring(1,bonclass.getName().length()).toLowerCase()%> <%if (inherits) {%>extends <%=classChart.getInherit().get(0).getName().substring(0,1).toUpperCase()+classChart.getInherit().get(0).getName().substring(1,classChart.getInherit().get(0).getName().length()).toLowerCase()%> <%}%> {
+	/**
+	 * @generated
+	 */
+	public <%=bonclass.getName().substring(0,1).toUpperCase()+bonclass.getName().substring(1,bonclass.getName().length()).toLowerCase()%> () {
+		<%if (inherits) {%>super();<%}%>
+	}   
+}
