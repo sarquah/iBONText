@@ -16,7 +16,7 @@ public class Java2BONModel
   }
 
   public final String NL = nl == null ? (System.getProperties().getProperty("line.separator")) : nl;
-  protected final String TEXT_1 = "-- Created by code generator" + NL + "system_chart ";
+  protected final String TEXT_1 = "-- Created by iBONText" + NL + "system_chart ";
   protected final String TEXT_2 = NL + "indexing ";
   protected final String TEXT_3 = NL;
   protected final String TEXT_4 = ": ";

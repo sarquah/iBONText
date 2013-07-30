@@ -2,7 +2,7 @@
 <%
   Informal_charts informalCharts = (Informal_charts) argument;
 %>
--- Created by code generator
+-- Created by iBONText
 system_chart <%=informalCharts.getSystem_chart().getName().toUpperCase()%>
 <%if (informalCharts.getSystem_chart().getChart_indexing()!=null) {%>
 indexing <%for (Index_Identifier indexIdent : informalCharts.getSystem_chart().getChart_indexing().getIndex_term_list()) {%>
