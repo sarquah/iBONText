@@ -1,0 +1,188 @@
+-- This system chart is only for testing purposes 
+-- Informal charts
+system_chart PERSONS
+indexing
+	author: "Stephen Sarquah";
+	keywords: "prototype", "person";
+explanation
+	"A person is a programmer using this tool"
+part "1/1"
+cluster ORGANIZATION
+description
+	"This represents all persons"
+end
+
+cluster_chart ORGANIZATION
+indexing
+	keywords: "cluster chart", "Organization";
+explanation
+	"This cluster represents\
+	\the base level of the system"
+part "1/1"
+cluster TEST2
+description
+	"Test2 is inside an organization"
+end
+
+cluster_chart TEST2
+indexing
+	keywords: "cluster chart";
+explanation
+	"This cluster represents the test2 level of the system"
+part "1/1"
+cluster TEST
+description
+	"Test is inside test2"
+end
+
+cluster_chart TEST
+indexing
+	keywords: "cluster chart";
+explanation
+	"This cluster represents the test level of the system"
+part "1/1"
+class PERSON
+description
+	"A person is a normal guy"
+cluster WORKGROUP
+description
+	"A workgroup consists of persons"
+cluster WORKGROUP2
+description
+	"Another workgroup consists of persons"
+end
+
+cluster_chart WORKGROUP
+indexing
+	author: "Stephen Sarquah";
+	keywords: "programmers", "person";
+explanation
+	"This cluster is a Workgroup"
+part "1/1"
+class PROGRAMMER
+description
+	"A programmer is also a normal guy"
+end
+
+cluster_chart WORKGROUP2
+indexing
+	author: "Stephen Sarquah";
+	keywords: "programmers", "person";
+explanation
+	"This cluster is another Workgroup"
+part "1/1"
+class TESTER
+description
+	"A tester is a person"
+end
+
+class_chart PERSON
+indexing
+	in_cluster: "Workgroup";
+	created: "31-01-2013";
+	revised: "31-01-2013";
+	author: "Stephen Sarquah";
+explanation
+	"A person is a normal guy which people derive from"
+part "1/1"
+query
+	"Name of person's mother", 
+	"Sex of person", 
+	"age of person", 
+	"Skills",
+	"Color of skin"
+command
+	"Change age"
+constraint
+	"Person must have skills",
+	"Person has a mother"
+end
+
+class_chart PROGRAMMER
+indexing
+	created: "03-04-2013";
+	revised: "03-04-2013";
+explanation
+	"A programmer is also a normal guy which derives from person"
+part "1/1"
+inherit PERSON
+command
+	"Add skills",
+	"Write"
+constraint
+	"Each person cannot program while sick"
+end
+
+class_chart TESTER
+indexing
+	created: "03-05-2013";
+explanation
+	"A tester is testing stuff but\
+	\This seems so weird"
+part "1/1"
+inherit PROGRAMMER
+command "Test"
+constraint
+	"A tester cannot test while not having skills"
+end
+
+event_chart PERSONS
+incoming
+indexing
+	author: "Stephen Sarquah";
+explanation
+	"This event chart shows all incoming events in the system"
+part "1/1"
+event 
+	"Make person a programmer"
+involves 
+	PERSON
+event
+	"Turn programmer into tester"
+involves
+	PERSON
+end
+
+event_chart PERSONS
+outgoing
+indexing
+	author: "Stephen Sarquah";
+explanation
+	"This event chart shows all outgoing events"
+part "1/1"
+event
+	"Make tester a person"
+involves
+	TESTER
+event
+	"Buy pizza"
+involves
+	PERSON
+end
+
+scenario_chart PERSONS
+indexing
+	author: "Stephen Sarquah";
+explanation
+	"This scenario chart shows a possible scenario of a system"
+part "1/1"
+scenario 
+	"Phone rings" 
+description 
+	"When the phone rings a person answers"
+scenario
+	"Removing programmer from system"
+description
+	"A programmer is removed from the system"
+end
+
+creation_chart PERSONS
+indexing
+	author: "Stephen Sarquah";
+explanation
+	"This creation chart explains how objects are created "
+part "1/1"
+creator PERSON creates PROGRAMMER
+creator PERSON creates TESTER
+creator PROGRAMMER creates TESTER
+end
