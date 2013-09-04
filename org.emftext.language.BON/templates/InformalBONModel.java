@@ -140,13 +140,13 @@ public class InformalBONModel
     if (classChart.getExplanation()!=null) {
     stringBuffer.append(TEXT_11);
     stringBuffer.append(explanation.substring(1,explanation.length()-1));
-    for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) {
+    if (classChart.getChart_indexing()!=null) { for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) {
     if (indexIdent.getName().equals("author")) {
     stringBuffer.append(TEXT_12);
     for (String string : indexIdent.getIndex_string()) {
     stringBuffer.append(string.substring(1,string.length()-1));
     stringBuffer.append(TEXT_13);
-    } } } }
+    } } } } }
     if (classChart.getQueries()!=null) {
     stringBuffer.append(TEXT_14);
     for (Query query : classChart.getQueries().getQuery()) {

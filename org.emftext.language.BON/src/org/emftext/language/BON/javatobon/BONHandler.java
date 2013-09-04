@@ -103,7 +103,7 @@ public class BONHandler extends AbstractHandler{
 						createEventCharts();
 						createCreationChart();
 						setSystemExplanation();
-						
+
 						String fileName = systemName+".bon";
 						//Create bon folder
 						IFolder bonFolder = selectedProject.getFolder("bon");
@@ -214,11 +214,36 @@ public class BONHandler extends AbstractHandler{
 	private void analysePackages(IProject project) throws JavaModelException {
 		IPackageFragment[] packages = JavaCore.create(project)
 				.getPackageFragments();
-		for (IPackageFragment javapackage : packages) {
-			if (javapackage.getKind() == IPackageFragmentRoot.K_SOURCE) {
-				createAST(javapackage);
+		for (IPackageFragment javaPackage : packages) {
+			if (javaPackage.getKind() == IPackageFragmentRoot.K_SOURCE) {
+				createAST(javaPackage);
 			}
+		}
+		for (IPackageFragment javaPackage : packages) {
+			if (javaPackage.getKind() == IPackageFragmentRoot.K_SOURCE) {
+				addClassToClusterChart(javaPackage);
+			}
+		}
+	}
 
+	private void addClassToClusterChart(IPackageFragment javaPackage) {
+		//Add class to cluster chart
+		String[] name=javaPackage.getElementName().split("\\.");					
+		try {
+			for (ICompilationUnit unit : javaPackage.getCompilationUnits()) {
+				if (!unit.getElementName().equals("package-info.java")) {
+					for (int i = 0; i < informalCharts.getCluster_charts().size(); i++) {
+						int size = name.length-1;
+						if (informalCharts.getCluster_charts().get(i).getCluster().getName().equals(name[size])) {
+							informalCharts.getCluster_charts().get(i).getClass_entries().add(getClassFromString(
+									unit.getElementName().substring(0, unit.getElementName().indexOf("."))));
+							break;
+						}
+					}
+				}
+			}
+		} catch (JavaModelException e) {
+			e.printStackTrace();
 		}		
 	}
 
@@ -550,16 +575,7 @@ public class BONHandler extends AbstractHandler{
 				parse.accept(visitor);
 				if (visitor.getType()!=null) {
 					classChart.getInherit().add(getClassFromString(visitor.getType().toString()));
-				}
-				//Add class to cluster chart
-				String[] name=mypackage.getElementName().split("\\.");				
-				for (int i = 0; i < informalCharts.getCluster_charts().size(); i++) {					
-					int size = name.length>1 ? name.length-2 : 0;
-					if (informalCharts.getCluster_charts().get(i).getCluster().getName().equals(name[size])) {
-						informalCharts.getCluster_charts().get(i).getClass_entries().add(classChart.getClass_());
-						break;
-					}
-				}
+				}				
 				if(hasIndexing) {
 					classChart.setChart_indexing(indexing);	
 				}

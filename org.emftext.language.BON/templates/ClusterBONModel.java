@@ -62,7 +62,7 @@ public class ClusterBONModel
 
     stringBuffer.append(TEXT_1);
     stringBuffer.append(description);
-    if (!clusterChart.getChart_indexing().getIndex_term_list().isEmpty()) {
+    if (clusterChart.getChart_indexing()!=null) { if (!clusterChart.getChart_indexing().getIndex_term_list().isEmpty()) {
     stringBuffer.append(TEXT_2);
     for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_term_list()) { if (!indexIdent.getName().equals("author")) {
     stringBuffer.append(TEXT_3);
@@ -82,7 +82,7 @@ for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_ter
     stringBuffer.append(TEXT_8);
     for (String string : indexIdent.getIndex_string()) {
     stringBuffer.append(string.substring(1,string.length()-1));
-    } } } }
+    } } } } }
     if (clusterChart.getExplanation()!=null) {
     stringBuffer.append(TEXT_9);
     stringBuffer.append(explanation);

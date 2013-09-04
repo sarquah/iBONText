@@ -66,8 +66,8 @@ package <%=packagename%>;
  *     <li><%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%}%></li><%}
  } }%>
 <%if (classChart.getExplanation()!=null) {%> 
- * @bon.explanation <%=explanation.substring(1,explanation.length()-1)%><%for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) {%><%if (indexIdent.getName().equals("author")) {%>
- * @author <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%> <%} } } }%>
+ * @bon.explanation <%=explanation.substring(1,explanation.length()-1)%><%if (classChart.getChart_indexing()!=null) { for (Index_Identifier indexIdent : classChart.getChart_indexing().getIndex_term_list()) {%><%if (indexIdent.getName().equals("author")) {%>
+ * @author <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%> <%} } } } }%>
 <%if (classChart.getQueries()!=null) {%>
  * @bon.query <%for (Query query : classChart.getQueries().getQuery()) {%>
  *	   <li><%=query.getName().substring(1,query.getName().length()-1)%></li><%}%>

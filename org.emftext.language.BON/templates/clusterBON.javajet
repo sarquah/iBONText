@@ -30,12 +30,12 @@
 %>
 /**
  * <%=description%>
-<%if (!clusterChart.getChart_indexing().getIndex_term_list().isEmpty()) {%>
+<%if (clusterChart.getChart_indexing()!=null) { if (!clusterChart.getChart_indexing().getIndex_term_list().isEmpty()) {%>
  * @bon.indexing <%for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_term_list()) { if (!indexIdent.getName().equals("author")) {%>
  *     <li><%=indexIdent.getName()%>: <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%if (indexIdent.getIndex_string().indexOf(string)!=indexIdent.getIndex_string().size()-1) {%>,<%}%> <%}%></li><%}
 } 
 for (Index_Identifier indexIdent : clusterChart.getChart_indexing().getIndex_term_list()) { if (indexIdent.getName().equals("author")) {%>
- * @author <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%} } } }%>
+ * @author <%for (String string : indexIdent.getIndex_string()) {%><%=string.substring(1,string.length()-1)%><%} } } } }%>
 <%if (clusterChart.getExplanation()!=null) {%>
  * @bon.explanation <%=explanation%><%}%>
  */
